@@ -1,0 +1,35 @@
+name: gotest
+on:
+  push
+
+jobs:
+  test_build:
+    name: test
+    env:
+      DOCKERNAME: gotest
+      DOCKERVERSION: v6
+    runs-on: [self-hosted,Linux,go1.19]
+    steps: 
+      - uses: actions/checkout@v3
+      - run: python --version
+      - run: echo "/usr/local/go/bin" >> $GITHUB_PATH
+      - run: sudo docker build --network=host -t gotest:v6 .
+      - run: /home/runner/docker/docker.sh
+  
+  deploy:
+    name: deploy
+    runs-on: [self-hosted,linux,deploy]
+    needs: test_build
+    steps:
+      - run: echo "DEPLOYMENTNAME=testdep" >> $GITHUB_ENV
+      - run: echo "NAMESPACE=test" >> $GITHUB_ENV
+      - run: echo "REPLIAS=1" >> $GITHUB_ENV
+      - run: echo "LABLENAME=testgo" >> $GITHUB_ENV
+      - run: echo "CONTAINERNAME=webtest" >> $GITHUB_ENV
+      - run: echo "IMAGENAME=10.245.146.108:5000/gotest:v6" >> $GITHUB_ENV
+      - run: echo "PODPORT=8888" >> $GITHUB_ENV
+      - run: echo "SERVICENAME=testser" >> $GITHUB_ENV
+      - run: echo "NODEPORT=30009" >> $GITHUB_ENV
+      - run: echo "PORTNAME=test" >> $GITHUB_ENV
+      - run: /home/runner/kube/kube.sh
+    

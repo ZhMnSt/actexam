@@ -31,5 +31,6 @@ jobs:
       - run: echo "SERVICENAME=testser" >> $GITHUB_ENV
       - run: echo "NODEPORT=30009" >> $GITHUB_ENV
       - run: echo "PORTNAME=test" >> $GITHUB_ENV
-      - run: /home/runner/kube/kube.sh
+      - run: /home/runner/kube/pod.sh
+      - run: /home/runner/kube/service.sh
     

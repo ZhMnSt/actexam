@@ -24,8 +24,6 @@ jobs:
       - run: echo "DEPLOYMENTNAME=testdep" >> $GITHUB_ENV
       - run: echo "NAMESPACE=test" >> $GITHUB_ENV
       - run: echo "REPLIAS=1" >> $GITHUB_ENV
-      - run: echo "LABLENAME=testgo" >> $GITHUB_ENV
-      - run: echo "CONTAINERNAME=webtest" >> $GITHUB_ENV
       - run: echo "IMAGENAME=10.245.146.108:5000/gotest:v6" >> $GITHUB_ENV
       - run: echo "PODPORT=8888" >> $GITHUB_ENV
       - run: echo "SERVICENAME=testser" >> $GITHUB_ENV
